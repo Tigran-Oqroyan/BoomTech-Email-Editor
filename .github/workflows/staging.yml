@@ -23,11 +23,11 @@ jobs:
             
             - name: Removing Old Files
               run: |
-                  rm -rf ./../../../../../../../var/www/wix/form/email_editor/*
+                  rm -rf /var/www/wix/form/email_editor/*
 
             - name: Moving Files
               run: |
-                  mv build/* ./../../../../../../../var/www/wix/form/email_editor/
+                  mv build/* /var/www/wix/form/email_editor/
 
             - name: Removing Node Modules
               run: |
