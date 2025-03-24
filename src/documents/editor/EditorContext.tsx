@@ -8,7 +8,7 @@ type TEventData = {
   type: string;
   platform: string;
   defaultConfig: object;
-  fieldsData: any;
+  fieldsData?: any;
   fields: any;
 };
 
@@ -24,7 +24,7 @@ type TValue = {
   type: string;
   platform: string;
   defaultConfig: object;
-  fieldsData: any;
+  fieldsData?: any;
   fields: any;
 };
 
@@ -148,4 +148,10 @@ export function setSelectedScreenSize(
   selectedScreenSize: TValue["selectedScreenSize"]
 ) {
   return editorStateStore.setState({ selectedScreenSize });
+}
+export function setClose(close:() => {}){
+  
+}
+export function closeModal(close: () => {}) {
+  close();
 }
