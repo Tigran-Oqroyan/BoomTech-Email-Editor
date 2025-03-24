@@ -1,0 +1,32 @@
+name: Production
+
+on:
+    workflow_dispatch:  
+    push:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: production
+
+        strategy:
+            matrix:
+                node-version: [20.x]
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - run: npm i
+            - run: npm run build
+
+            - name: Clear Cloud Caches
+              run: |
+                  curl -X POST https://api.cloudflare.com/client/v4/zones/879604414dccd603ccd2fe18c69a4146/purge_cache -H "X-Auth-Email: infoboomtech@gmail.com" -H "X-Auth-Key: 8242f1a4cd0acd87b44a2fb34a590c81daa6a" -H "Content-Type: application/json" --data '{"purge_everything":true}'
+
+            - name: Moving Build Forlder
+              run: |
+                rm -rf /var/www/form.boomte.ch/email_editor/* && mv -f ./build/* /var/www/form.boomte.ch/email_editor/
