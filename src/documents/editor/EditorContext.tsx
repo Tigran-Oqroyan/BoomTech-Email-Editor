@@ -149,9 +149,4 @@ export function setSelectedScreenSize(
 ) {
   return editorStateStore.setState({ selectedScreenSize });
 }
-export function setClose(close:() => {}){
-  
-}
-export function closeModal(close: () => {}) {
-  close();
-}
+

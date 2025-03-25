@@ -51,27 +51,6 @@ export default function TemplatePanel() {
   }
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get("type") ?? "";
-
-    if (type && type === "CUSTOM_NOTIFICATION") {
-      const platform = params.get("platform") ?? "";
-      const defaultConfig = JSON.parse(params.get("defaultConfig") ?? "{}");
-      const fields = params.get("fields") ?? "";
-      const onClose = params.get("onClose")
-      console.log(onClose);
-      
-      const eventData = {
-        type,
-        platform,
-        defaultConfig,
-        fields,
-      };
-
-      setEventData(eventData);
-      editorStateStore.getState().updateDocument(eventData);
-    }
-
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type?.startsWith("CUSTOM_NOTIFICATION")) {
         setEventData(event.data);
