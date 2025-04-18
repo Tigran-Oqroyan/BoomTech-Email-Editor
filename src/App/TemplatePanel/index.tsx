@@ -57,6 +57,7 @@ export default function TemplatePanel() {
         editorStateStore.getState().updateDocument(event.data);
       }
     };
+
     window.addEventListener("message", handleMessage);
     return () => {
       window.removeEventListener("message", handleMessage);
